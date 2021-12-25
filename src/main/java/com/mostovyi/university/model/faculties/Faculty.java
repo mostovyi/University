@@ -1,10 +1,12 @@
 package com.mostovyi.university.model.faculties;
 
 import com.mostovyi.university.model.user.Student;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.List;
 
+@Data
 @Entity
 public class Faculty {
 
@@ -23,27 +25,4 @@ public class Faculty {
 
     public Faculty() {}
 
-    public Long getID() {
-        return ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public List<Student> getStudents() {
-        return students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 }

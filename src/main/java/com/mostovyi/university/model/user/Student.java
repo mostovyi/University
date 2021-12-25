@@ -6,11 +6,13 @@ import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import com.mostovyi.university.model.Degree;
 import com.mostovyi.university.model.faculties.Faculty;
 import com.mostovyi.university.model.lectures.Lecture;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @JsonIgnoreProperties({"hibernateLazyInitializer"})
 @JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class,  property = "id")
@@ -44,52 +46,7 @@ public class Student {
     }
 
     public Student() {}
-
-    public Long getID() {
-        return this.ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
-
-    public String getFirstName() {
-        return this.firstName;
-    }
-
-    public void setFirstName(String firstName) {
-        this.firstName = firstName;
-    }
-
-    public String getLastName() {
-        return this.lastName;
-    }
-
-    public void setLastName(String lastName) {
-        this.lastName = lastName;
-    }
-
-    public Degree getDegree() {
-        return this.degree;
-    }
-
-    public void setDegree(Degree degree) {
-        this.degree = degree;
-    }
-
-    public Faculty getFaculty() {
-        return faculty;
-    }
-
-    public void setFaculty(Faculty faculty) {
-        this.faculty = faculty;
-    }
-
-    public void addLecture(Lecture lecture) {
-        this.lectures.add(lecture);
-        lecture.getStudents().add(this);
-    }
-
+    
     @Override
     public String toString() {
         return this.firstName + " | " + this.lastName + " | " + this.degree;

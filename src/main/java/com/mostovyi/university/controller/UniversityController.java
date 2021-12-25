@@ -32,14 +32,17 @@ public class UniversityController {
     @Autowired
     private LectureRepository lectureRepository;
 
-    @GetMapping("")
+
     public List<Faculty> faculties() {
         return facultyRepository.findAll();
     }
 
-    @GetMapping("student")
+    //@GetMapping("student")
     public List<Student> university() {
-
+        Faculty faculty = new Faculty("Sebek");
+        facultyRepository.save(faculty);
+        Student student = new Student("First", "Last", Degree.BACHELOR, faculty);
+        this.studentRepository.save(student);
         //Lecture lecture = new Lecture("Math", Day.Monday); lectureRepository.save(lecture);
         //Student student = new Student("New", "Test", Degree.Bachelor, facultyRepository.findFacultiesByName("Informatics"));
 
@@ -48,11 +51,11 @@ public class UniversityController {
         return studentRepository.findAll();
     }
 
-    @GetMapping("student/{id}")
+   // @GetMapping("student/{id}")
     public Student getStudentById(@PathVariable Long id) {
         logger.error("Here {}.", studentRepository.getById(id).toString());
         return studentRepository.getById(id);
     }
-    
+
 
 }

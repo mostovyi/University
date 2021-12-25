@@ -3,11 +3,13 @@ package com.mostovyi.university.model.lectures;
 import com.fasterxml.jackson.annotation.*;
 import com.mostovyi.university.model.Day;
 import com.mostovyi.university.model.user.Student;
+import lombok.Data;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.List;
 
+@Data
 @Entity
 @JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class, property = "id")
 public class Lecture {
@@ -31,35 +33,4 @@ public class Lecture {
 
     public Lecture() {}
 
-    public Long getID() {
-        return this.ID;
-    }
-
-    public void setID(Long ID) {
-        this.ID = ID;
-    }
-
-    public String getName() {
-        return this.name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public Day getDay() {
-        return this.day;
-    }
-
-    public void setDay(Day day) {
-        this.day = day;
-    }
-
-    public List<Student> getStudents() {
-        return this.students;
-    }
-
-    public void setStudents(List<Student> students) {
-        this.students = students;
-    }
 }
