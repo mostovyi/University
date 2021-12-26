@@ -1,7 +1,7 @@
 package com.mostovyi.university.model.lectures;
 
 import com.fasterxml.jackson.annotation.*;
-import com.mostovyi.university.model.Day;
+import com.mostovyi.university.model.enums.Day;
 import com.mostovyi.university.model.user.Student;
 import lombok.Data;
 
@@ -23,8 +23,8 @@ public class Lecture {
     @Enumerated(EnumType.STRING)
     private Day day;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "lectures")
-    private List<Student> students = new ArrayList<>();;
+    @ManyToMany(mappedBy = "lectures")
+    private List<Student> students = new ArrayList<>();
 
     public Lecture(String name, Day day) {
         this.name = name;
@@ -33,4 +33,8 @@ public class Lecture {
 
     public Lecture() {}
 
+    @Override
+    public String toString() {
+        return String.format("%s lecture, id is : %d, day : %s", this.name, this.ID, this.day.name());
+    }
 }

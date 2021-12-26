@@ -1,4 +1,4 @@
-package com.mostovyi.university.model;
+package com.mostovyi.university.model.enums;
 
 public enum Degree {
     BACHELOR,

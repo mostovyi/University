@@ -1,9 +1,7 @@
 package com.mostovyi.university.model.user;
 
-import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.fasterxml.jackson.annotation.ObjectIdGenerators;
-import com.mostovyi.university.model.Degree;
+import com.mostovyi.university.model.enums.Degree;
 import com.mostovyi.university.model.faculties.Faculty;
 import com.mostovyi.university.model.lectures.Lecture;
 import lombok.Data;
@@ -14,8 +12,6 @@ import java.util.List;
 
 @Data
 @Entity
-@JsonIgnoreProperties({"hibernateLazyInitializer"})
-@JsonIdentityInfo( generator = ObjectIdGenerators.PropertyGenerator.class,  property = "id")
 public class Student {
 
     @Id
@@ -26,16 +22,19 @@ public class Student {
     private String lastName;
 
     @Enumerated(EnumType.STRING)
-    Degree degree;
+    private Degree degree;
 
-    @ManyToOne(fetch = FetchType.EAGER, cascade = {CascadeType.MERGE, CascadeType.PERSIST})
-    @JoinColumn(name = "faculty_id", nullable = false)
-    Faculty faculty;
+    @ManyToOne
+    @JoinColumn(name="faculty_id", nullable=false)
+    private Faculty faculty;
 
-    @ManyToMany
-    @JoinTable(name="student_lecture",
-            joinColumns = @JoinColumn(name="student_id"),
-            inverseJoinColumns = @JoinColumn(name="lecture_id"))
+    @ManyToMany(cascade = { CascadeType.ALL })
+    @JsonIgnoreProperties({"hibernateLazyInitializer", "handler"})
+    @JoinTable(
+            name = "Student_Lecture",
+            joinColumns = { @JoinColumn(name = "student_id") },
+            inverseJoinColumns = { @JoinColumn(name = "lecture_id") }
+    )
     private List<Lecture> lectures = new ArrayList<>();
 
     public Student(String firstName, String lastName, Degree degree, Faculty faculty) {
@@ -46,10 +45,10 @@ public class Student {
     }
 
     public Student() {}
-    
+
     @Override
     public String toString() {
-        return this.firstName + " | " + this.lastName + " | " + this.degree;
+        return String.format("%s %s, id : %d, becoming %s degree.", this.firstName, this.lastName, this.ID, this.degree.name());
     }
 
 }

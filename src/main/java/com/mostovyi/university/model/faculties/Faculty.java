@@ -16,7 +16,7 @@ public class Faculty {
 
     private String name;
 
-    @OneToMany(fetch = FetchType.EAGER, mappedBy = "faculty")
+    @OneToMany(mappedBy = "lectures")
     private List<Student> students;
 
     public Faculty(String name) {
@@ -25,4 +25,8 @@ public class Faculty {
 
     public Faculty() {}
 
+    @Override
+    public String toString() {
+        return String.format("Faculty of %s id : %d. ",this.name, this.ID);
+    }
 }
