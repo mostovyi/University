@@ -2,7 +2,7 @@ package com.mostovyi.university.service.impl;
 
 import com.mostovyi.university.exceptions.ResourceNotFoundException;
 import com.mostovyi.university.model.enums.Day;
-import com.mostovyi.university.model.lectures.Lecture;
+import com.mostovyi.university.model.lectures.Course;
 import com.mostovyi.university.model.user.Student;
 import com.mostovyi.university.repository.StudentRepository;
 import com.mostovyi.university.service.StudentService;
@@ -46,12 +46,12 @@ public class StudentServiceImpl implements StudentService {
         return new ResourceNotFoundException("Employee", "Id", id);}); }
 
     @Override
-    public List<Lecture> getLecturesListForDay(Long id, Day day) {
-        List<Lecture> lectureList = studentRepository.getAllByLecturesDay(id, day);
+    public List<Course> getLecturesListForDay(Long id, Day day) {
+        List<Course> courseList = studentRepository.getAllByLecturesDay(id, day);
 
-        if(lectureList.isEmpty()) { logger.warn("No lectures found!"); }
+        if(courseList.isEmpty()) { logger.warn("No courses found!"); }
 
-        logger.info("Lectures found.");
-        return lectureList;
+        logger.info("Courses found.");
+        return courseList;
     }
 }

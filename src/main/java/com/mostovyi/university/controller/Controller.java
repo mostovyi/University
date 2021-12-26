@@ -3,10 +3,10 @@ package com.mostovyi.university.controller;
 import com.mostovyi.university.model.enums.Day;
 import com.mostovyi.university.model.enums.Degree;
 import com.mostovyi.university.model.faculties.Faculty;
-import com.mostovyi.university.model.lectures.Lecture;
+import com.mostovyi.university.model.lectures.Course;
 import com.mostovyi.university.model.user.Student;
 import com.mostovyi.university.repository.FacultyRepository;
-import com.mostovyi.university.repository.LectureRepository;
+import com.mostovyi.university.repository.CourseRepository;
 import com.mostovyi.university.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -32,34 +32,34 @@ public class Controller {
     private StudentRepository studentRepository;
 
     @Autowired
-    private LectureRepository lectureRepository;
+    private CourseRepository courseRepository;
 
     @GetMapping
     public void setDataBase() {
 
-        Lecture mathM = new Lecture("Math", Day.MONDAY);
-        Lecture mathF = new Lecture("Math", Day.FRIDAY);
-        Lecture mathW = new Lecture("Math", Day.WEDNESDAY);
-        Lecture programmingM = new Lecture("Programming 1", Day.MONDAY);
-        Lecture programmingTu = new Lecture("Programming 1", Day.TUESDAY);
-        Lecture softEngiTh = new Lecture("Software Engineering 2", Day.THURSDAY);
-        Lecture softEngiMo = new Lecture("Software Engineering 2", Day.MONDAY);
-        Lecture softEngiFr = new Lecture("Software Engineering 2", Day.FRIDAY);
-        Lecture comptGraphTh = new Lecture("Foundations of Computer Graphics", Day.THURSDAY);
-        Lecture comptGraphW = new Lecture("Foundations of Computer Graphics", Day.WEDNESDAY);
-        Lecture comptGraphF = new Lecture("Foundations of Computer Graphics", Day.FRIDAY);
-        Lecture networkTechM = new Lecture("Network Technologies for Multimedia Applications", Day.MONDAY);
-        Lecture networkTechW = new Lecture("Network Technologies for Multimedia Applications", Day.WEDNESDAY);
-        Lecture sipM = new Lecture("Signal and Image Processing", Day.MONDAY);
-        Lecture sipT = new Lecture("Signal and Image Processing", Day.TUESDAY);
-        Lecture operatingSystemsW = new Lecture("Operating Systems", Day.WEDNESDAY);
-        Lecture operatingSystemsTh = new Lecture("Operating Systems", Day.THURSDAY);
-        Lecture operatingSystemsT = new Lecture("Operating Systems", Day.TUESDAY);
-        Lecture programmingLanguagesW = new Lecture("Programming Languages and Concepts", Day.WEDNESDAY);
-        Lecture programmingLanguagesT = new Lecture("Programming Languages and Concepts", Day.THURSDAY);
-        Lecture programmingLanguagesF = new Lecture("Programming Languages and Concepts", Day.FRIDAY);
+        Course mathM = new Course("Math", Day.MONDAY);
+        Course mathF = new Course("Math", Day.FRIDAY);
+        Course mathW = new Course("Math", Day.WEDNESDAY);
+        Course programmingM = new Course("Programming 1", Day.MONDAY);
+        Course programmingTu = new Course("Programming 1", Day.TUESDAY);
+        Course softEngiTh = new Course("Software Engineering 2", Day.THURSDAY);
+        Course softEngiMo = new Course("Software Engineering 2", Day.MONDAY);
+        Course softEngiFr = new Course("Software Engineering 2", Day.FRIDAY);
+        Course comptGraphTh = new Course("Foundations of Computer Graphics", Day.THURSDAY);
+        Course comptGraphW = new Course("Foundations of Computer Graphics", Day.WEDNESDAY);
+        Course comptGraphF = new Course("Foundations of Computer Graphics", Day.FRIDAY);
+        Course networkTechM = new Course("Network Technologies for Multimedia Applications", Day.MONDAY);
+        Course networkTechW = new Course("Network Technologies for Multimedia Applications", Day.WEDNESDAY);
+        Course sipM = new Course("Signal and Image Processing", Day.MONDAY);
+        Course sipT = new Course("Signal and Image Processing", Day.TUESDAY);
+        Course operatingSystemsW = new Course("Operating Systems", Day.WEDNESDAY);
+        Course operatingSystemsTh = new Course("Operating Systems", Day.THURSDAY);
+        Course operatingSystemsT = new Course("Operating Systems", Day.TUESDAY);
+        Course programmingLanguagesW = new Course("Programming Languages and Concepts", Day.WEDNESDAY);
+        Course programmingLanguagesT = new Course("Programming Languages and Concepts", Day.THURSDAY);
+        Course programmingLanguagesF = new Course("Programming Languages and Concepts", Day.FRIDAY);
 
-        lectureRepository.saveAll(new ArrayList<>(Arrays.asList(mathF, mathM, mathW, programmingM, programmingTu, softEngiTh,
+        courseRepository.saveAll(new ArrayList<>(Arrays.asList(mathF, mathM, mathW, programmingM, programmingTu, softEngiTh,
                 softEngiMo, softEngiFr, comptGraphTh, comptGraphW, comptGraphF, networkTechM, networkTechW,
                 sipM, sipT, operatingSystemsW, operatingSystemsTh, operatingSystemsT, programmingLanguagesW,
                 programmingLanguagesT, programmingLanguagesF)));
@@ -68,29 +68,33 @@ public class Controller {
         Faculty faculty_ = new Faculty("Business and economics");
         facultyRepository.saveAll(Arrays.asList(faculty, faculty_));
 
-        Student student = new Student("Oleg", "Borisov", Degree.BACHELOR, faculty);
-        Student student2 = new Student("Maxim", "Maximov", Degree.BACHELOR, faculty);
-        Student student3 = new Student("Jonh", "Smith", Degree.BACHELOR, faculty);
-        Student student4 = new Student("David", "Davidov", Degree.BACHELOR, faculty);
+        Student student = new Student("Oleg", "Borisov", Degree.BACHELOR);
+        Student student2 = new Student("Maxim", "Maximov", Degree.BACHELOR);
+        Student student3 = new Student("Jonh", "Smith", Degree.BACHELOR);
+        Student student4 = new Student("David", "Davidov", Degree.BACHELOR);
 
-        student.setLectures(new ArrayList<>(Arrays.asList(mathF, mathM, mathW, programmingM, programmingTu, softEngiTh,
+        faculty.addStudent(student);
+        faculty.addStudent(student2);
+        faculty.addStudent(student3);
+        faculty.addStudent(student4);
+
+        student.setCourses(new ArrayList<>(Arrays.asList(mathF, mathM, mathW, programmingM, programmingTu, softEngiTh,
                 softEngiMo, softEngiFr, comptGraphTh, comptGraphW, comptGraphF, networkTechM, networkTechW,
                 sipM, sipT, operatingSystemsW, operatingSystemsTh, operatingSystemsT, programmingLanguagesW,
                 programmingLanguagesT, programmingLanguagesF)));
-        student2.setLectures(new ArrayList<>(Arrays.asList(mathF,  mathW, programmingM, programmingTu, softEngiTh,
+        student2.setCourses(new ArrayList<>(Arrays.asList(mathF,  mathW, programmingM, programmingTu, softEngiTh,
                 softEngiMo, softEngiFr, comptGraphTh, comptGraphW, networkTechW,
                 sipM, operatingSystemsTh, operatingSystemsT, programmingLanguagesW,
                 programmingLanguagesT, programmingLanguagesF)));
-        student3.setLectures(new ArrayList<>(Arrays.asList(comptGraphW, comptGraphF, networkTechM, networkTechW,
+        student3.setCourses(new ArrayList<>(Arrays.asList(comptGraphW, comptGraphF, networkTechM, networkTechW,
                 sipM, sipT, operatingSystemsW, operatingSystemsTh, operatingSystemsT, programmingLanguagesW,
                 programmingLanguagesT, programmingLanguagesF)));
-        student4.setLectures(new ArrayList<>(Arrays.asList(mathF, mathM, mathW, programmingM, programmingTu, softEngiTh,
+        student4.setCourses(new ArrayList<>(Arrays.asList(mathF, mathM, mathW, programmingM, programmingTu, softEngiTh,
                 softEngiMo, softEngiFr,  networkTechW,
                 sipM, sipT, operatingSystemsW, operatingSystemsTh, programmingLanguagesF)));
 
         studentRepository.saveAll(new ArrayList<>(Arrays.asList(student, student2, student3, student4)));
 
-        faculty.setStudents(new ArrayList<>(Arrays.asList(student, student2, student3, student4)));
-        this.facultyRepository.save(faculty);
+        //this.facultyRepository.save(faculty);
     }
 }

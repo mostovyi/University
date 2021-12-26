@@ -1,7 +1,6 @@
 package com.mostovyi.university.controller;
 
 import com.mostovyi.university.model.enums.Day;
-import com.mostovyi.university.model.lectures.Lecture;
 import com.mostovyi.university.model.user.Student;
 import com.mostovyi.university.service.StudentService;
 import org.slf4j.Logger;
@@ -10,7 +9,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
@@ -49,7 +47,7 @@ public class StudentController {
 
     @GetMapping("{id}/{day}")
     public String getLecturesByDay(@PathVariable Long id, @PathVariable Day day) {
-        logger.info("Searching lectures for student id : {}, on {}", id, day.name());
+        logger.info("Searching courses for student id : {}, on {}", id, day.name());
         return this.studentService.getLecturesListForDay(id, day).stream().map(Object::toString)
                 .collect(Collectors.joining(" | "));
     }

@@ -1,5 +1,6 @@
 package com.mostovyi.university.controller;
 
+
 import com.mostovyi.university.service.FacultyService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
