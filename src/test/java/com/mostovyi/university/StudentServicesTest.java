@@ -31,6 +31,10 @@ public class StudentServicesTest {
     @Autowired
     StudentServiceImpl studentService;
 
+    /*
+    * StudentRepository must be called when
+    *  user must be saved
+    * */
     @Test
     public void when_we_saving_user_it_should_call_student_repository() {
 
@@ -40,6 +44,9 @@ public class StudentServicesTest {
 
     }
 
+    /*
+     * Saving user operation must return User
+     * */
     @Test
     public void when_save_user_it_should_return_user() {
 
@@ -50,7 +57,9 @@ public class StudentServicesTest {
 
     }
 
-
+    /*
+     * Search by ID have to return a User
+     * */
     @Test
     public void when_we_want_to_find_user_by_id_should_return_user_with_id() {
 
@@ -63,6 +72,9 @@ public class StudentServicesTest {
 
     }
 
+    /*
+    * If user is not found, ResourceNotFoundException must be thrown
+    * */
     @Test(expected = ResourceNotFoundException.class)
     public void when_we_want_to_find_user_by_id_should_return_error() {
 
@@ -73,6 +85,9 @@ public class StudentServicesTest {
 
     }
 
+    /*
+    * Cheking list size after findAll() method
+    * */
     @Test
     public void want_all_users_list_should_return_users_list_with_expected_size() {
 

@@ -20,6 +20,9 @@ public class FacultyServiceImpl implements FacultyService {
     @Autowired
     public FacultyServiceImpl(FacultyRepository facultyRepository) { this.facultyRepository = facultyRepository; }
 
+    /*
+    * Getting Faculties list. Checking if it's empty or not.
+    * */
     @Override
     public List<Faculty> showAllFaculties() {
         List<Faculty> facultyList = this.facultyRepository.findAll();

@@ -20,7 +20,7 @@ import java.util.Arrays;
 @RequestMapping("/")
 
 /*
-* This bean is used just to fill the database with data
+* This bean is used just to fill the database with data.
 * */
 
 public class Controller {
@@ -94,7 +94,5 @@ public class Controller {
                 sipM, sipT, operatingSystemsW, operatingSystemsTh, programmingLanguagesF)));
 
         studentRepository.saveAll(new ArrayList<>(Arrays.asList(student, student2, student3, student4)));
-
-        //this.facultyRepository.save(faculty);
     }
 }

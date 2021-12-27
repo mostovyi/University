@@ -18,6 +18,9 @@ public class StudentController {
     private final Logger logger = LoggerFactory.getLogger(StudentController.class);
     private StudentService studentService;
 
+    /*
+    * Initializing StudentService
+    * */
     public StudentController(StudentService studentService) {
         this.studentService = studentService;
         logger.info("StudentController created.");
@@ -32,6 +35,9 @@ public class StudentController {
         return new ResponseEntity<>(studentService.saveStudent(student), HttpStatus.CREATED);
     }
 
+    /*
+     * All users from database
+     * */
     @GetMapping
     public String allStudents() {
         logger.info("Searching students...");
@@ -39,12 +45,18 @@ public class StudentController {
                 .collect(Collectors.joining(" | "));
     }
 
+    /*
+     * Looking for a User with unique ID
+     * */
     @GetMapping("{id}")
     public String getStudentById(@PathVariable Long id) {
         logger.info("Searching Student by id : {}.", id);
         return studentService.findStudentById(id).toString();
     }
 
+    /*
+     * Looking for USERs lectures for a specific day
+     * */
     @GetMapping("{id}/{day}")
     public String getLecturesByDay(@PathVariable Long id, @PathVariable Day day) {
         logger.info("Searching courses for student id : {}, on {}", id, day.name());

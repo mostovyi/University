@@ -17,11 +17,17 @@ public class FacultyController {
     private final Logger logger = LoggerFactory.getLogger(FacultyController.class);
     private final FacultyService facultyService;
 
+    /*
+     * FacultyService initializing
+     * */
     public FacultyController(FacultyService facultyService) {
         this.facultyService = facultyService;
         logger.info("FacultyController created.");
     }
 
+    /*
+     * Getting all FACULTIES from database
+     * */
     @GetMapping
     public String faculties() {
         logger.info("Parsing all faculties from database.");

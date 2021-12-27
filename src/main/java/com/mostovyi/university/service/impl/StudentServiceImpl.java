@@ -24,11 +24,17 @@ public class StudentServiceImpl implements StudentService {
         this.studentRepository = studentRepository;
     }
 
+    /*
+    * Saving user into Database
+    * */
     @Override
     public Student saveStudent(Student student) {
         return this.studentRepository.save(student);
     }
 
+    /*
+    * Getting list of all users. Checking it on empty
+    * */
     @Override
     public List<Student> getAllStudents() {
         List<Student> studentList = this.studentRepository.findAll();
@@ -40,11 +46,17 @@ public class StudentServiceImpl implements StudentService {
         return studentList;
     }
 
+    /*
+    * Looking for specific user by ID
+    * */
     @Override
     public Student findStudentById(Long id) { return this.studentRepository.findById(id).orElseThrow(() -> {
         logger.error("Student with following id : {} is not found.", id);
         return new ResourceNotFoundException("Employee", "Id", id);}); }
 
+    /*
+    * Looking for users lectures on specific day
+    * */
     @Override
     public List<Course> getLecturesListForDay(Long id, Day day) {
         List<Course> courseList = studentRepository.getAllByLecturesDay(id, day);
