@@ -1,0 +1,18 @@
+version: '3.1'
+services:
+  app:
+    container_name: university-1.0
+    image: university-1.0
+    build: ./
+    ports:
+      - "8080:8080"
+    depends_on:
+      - dbpostgresql
+  dbpostgresql:
+    image: postgres
+    ports:
+      - "5432:5432"
+    environment:
+      - POSTGRES_PASSWORD=passwort
+      - POSTGRES_USER=newuser
+      - POSTGRES_DB=university_db
